@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="CardsID" />
+          </Key>
+          <Property Name="CardsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChargeAccountTypeID" Type="int" Nullable="false" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardPassWord" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReChargeStatus" Type="int" />
+          <Property Name="ReChargeMsg" Type="varchar" MaxLength="50" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="CreatTime" Type="datetime" />
+          <Property Name="UseTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChargeAccountType">
+          <Key>
+            <PropertyRef Name="ChargeAccountTypeID" />
+          </Key>
+          <Property Name="ChargeAccountTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="IsCard" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChargeClass">
+          <Key>
+            <PropertyRef Name="ChargeClassID" />
+          </Key>
+          <Property Name="ChargeClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChargeClassName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descrtion" Type="varchar" MaxLength="100" />
+          <Property Name="QueryClassName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ChargeClassInfo">
+          <Key>
+            <PropertyRef Name="ChargeClassInfoID" />
+          </Key>
+          <Property Name="ChargeClassInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChargeClassID" Type="int" Nullable="false" />
+          <Property Name="ResultInfo" Type="varchar(max)" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ClientConfig">
+          <Key>
+            <PropertyRef Name="ClientConfigID" />
+          </Key>
+          <Property Name="ClientConfigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchantID" Type="varchar" MaxLength="50" />
+          <Property Name="MerchantKey" Type="varchar" MaxLength="50" />
+          <Property Name="GetOrdersURL" Type="varchar" MaxLength="50" />
+          <Property Name="NotifyOrderURL" Type="varchar" MaxLength="50" />
+          <Property Name="WinSkin" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="GetOrderCount" Type="int" />
+          <Property Name="GetOrderTime" Type="int" />
+          <Property Name="MerchantCode" Type="varchar" MaxLength="10" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderInsideID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderExternalID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductID" Type="varchar" MaxLength="50" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" />
+          <Property Name="ProductParValue" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="ProductSalePrice" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="TargetAccount" Type="varchar" MaxLength="50" />
+          <Property Name="TargetAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="TargetAccountTypeName" Type="varchar" MaxLength="50" />
+          <Property Name="BuyAmount" Type="int" />
+          <Property Name="TotalSalePrice" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Game" Type="varchar" MaxLength="50" />
+          <Property Name="GameName" Type="varchar" MaxLength="50" />
+          <Property Name="Area" Type="varchar" MaxLength="50" />
+          <Property Name="AreaName" Type="varchar" MaxLength="50" />
+          <Property Name="Server" Type="varchar" MaxLength="50" />
+          <Property Name="ServerName" Type="varchar" MaxLength="50" />
+          <Property Name="RechargeMode" Type="varchar" MaxLength="50" />
+          <Property Name="RechargeModeName" Type="varchar" MaxLength="50" />
+          <Property Name="StockMerchantId" Type="varchar" MaxLength="50" />
+          <Property Name="StockMerchantName" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerIp" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerRegion" Type="varchar" MaxLength="50" />
+          <Property Name="DealDateTime" Type="datetime" />
+          <Property Name="StartDatetime" Type="datetime" />
+          <Property Name="EndDatetime" Type="datetime" />
+          <Property Name="RechargeStatus" Type="int" />
+          <Property Name="SuccessfulAmount" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="ChargeAccountInfo" Type="varchar(max)" />
+          <Property Name="RechargeMsg" Type="varchar(max)" />
+          <Property Name="IsNotify" Type="bit" />
+          <Property Name="MerchantCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="OrderChargeAccount">
+          <Key>
+            <PropertyRef Name="OrderChargeAccountID" />
+          </Key>
+          <Property Name="OrderChargeAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChargeAccountTypeID" Type="int" Nullable="false" />
+          <Property Name="ChargeAccount" Type="varchar" MaxLength="50" />
+          <Property Name="ChargePassword" Type="varchar" MaxLength="50" />
+          <Property Name="PayPassword" Type="varchar" MaxLength="50" />
+          <Property Name="ParValue" Type="int" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="UseTimes" Type="int" />
+          <Property Name="IsUsing" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="LastUseTime" Type="datetime" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChargeClassID" Type="int" Nullable="false" />
+          <Property Name="ProductCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descrtion" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="MerchantCode" Type="varchar" MaxLength="10" />
+          <Property Name="ChargeClassProductCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ProductInfoID" />
+          </Key>
+          <Property Name="ProductInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="GameName" Type="varchar" MaxLength="250" />
+          <Property Name="GameValue" Type="varchar" MaxLength="250" />
+          <Property Name="ServerName" Type="varchar" MaxLength="250" />
+          <Property Name="ServerValue" Type="varchar" MaxLength="250" />
+          <Property Name="AreaName" Type="varchar" MaxLength="250" />
+          <Property Name="AreaValue" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="DCLModelStoreContainer">
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChargeAccountType" EntityType="Self.ChargeAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChargeClass" EntityType="Self.ChargeClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChargeClassInfo" EntityType="Self.ChargeClassInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientConfig" EntityType="Self.ClientConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderChargeAccount" EntityType="Self.OrderChargeAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="CardsID" />
+          </Key>
+          <Property Name="CardsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChargeAccountTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReChargeStatus" Type="Int32" />
+          <Property Name="ReChargeMsg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="CreatTime" Type="DateTime" Precision="3" />
+          <Property Name="UseTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChargeAccountType">
+          <Key>
+            <PropertyRef Name="ChargeAccountTypeID" />
+          </Key>
+          <Property Name="ChargeAccountTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsCard" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChargeClass">
+          <Key>
+            <PropertyRef Name="ChargeClassID" />
+          </Key>
+          <Property Name="ChargeClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChargeClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descrtion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QueryClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClientConfig">
+          <Key>
+            <PropertyRef Name="ClientConfigID" />
+          </Key>
+          <Property Name="ClientConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchantID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MerchantKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GetOrdersURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NotifyOrderURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GetOrderCount" Type="Int32" />
+          <Property Name="GetOrderTime" Type="Int32" />
+          <Property Name="MerchantCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WinSkin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderInsideID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderExternalID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductParValue" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ProductSalePrice" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TargetAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TargetAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TargetAccountTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BuyAmount" Type="Int32" />
+          <Property Name="TotalSalePrice" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Game" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GameName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Server" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RechargeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RechargeModeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StockMerchantId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StockMerchantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerRegion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DealDateTime" Type="DateTime" Precision="3" />
+          <Property Name="StartDatetime" Type="DateTime" Precision="3" />
+          <Property Name="EndDatetime" Type="DateTime" Precision="3" />
+          <Property Name="RechargeStatus" Type="Int32" />
+          <Property Name="SuccessfulAmount" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ChargeAccountInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RechargeMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsNotify" Type="Boolean" />
+          <Property Name="MerchantCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OrderChargeAccount">
+          <Key>
+            <PropertyRef Name="OrderChargeAccountID" />
+          </Key>
+          <Property Name="OrderChargeAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChargeAccountTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ChargeAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChargePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParValue" Type="Int32" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="UseTimes" Type="Int32" />
+          <Property Name="IsUsing" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUseTime" Type="DateTime" Precision="3" />
+          <Property Name="IsAvailable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChargeClassID" Type="Int32" Nullable="false" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descrtion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="MerchantCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChargeClassProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DCLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cards" EntityType="Self.Cards" />
+          <EntitySet Name="ChargeAccountType" EntityType="Self.ChargeAccountType" />
+          <EntitySet Name="ChargeClass" EntityType="Self.ChargeClass" />
+          <EntitySet Name="ClientConfig" EntityType="Self.ClientConfig" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderChargeAccount" EntityType="Self.OrderChargeAccount" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ChargeClassInfo" EntityType="DCLModel.ChargeClassInfo" />
+          <EntitySet Name="ProductInfo" EntityType="DCLModel.ProductInfo" />
+          <EntitySet Name="User" EntityType="DCLModel.User" />
+        </EntityContainer>
+        <EntityType Name="ChargeClassInfo">
+          <Key>
+            <PropertyRef Name="ChargeClassInfoID" />
+          </Key>
+          <Property Name="ChargeClassInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChargeClassID" Type="Int32" Nullable="false" />
+          <Property Name="ResultInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ProductInfoID" />
+          </Key>
+          <Property Name="ProductInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="GameName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GameValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ServerName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ServerValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AreaName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AreaValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DCLModelStoreContainer" CdmEntityContainer="DCLEntities">
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="DCLModel.Cards">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="CardsID" ColumnName="CardsID" />
+                <ScalarProperty Name="ChargeAccountTypeID" ColumnName="ChargeAccountTypeID" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardPassWord" ColumnName="CardPassWord" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ReChargeStatus" ColumnName="ReChargeStatus" />
+                <ScalarProperty Name="ReChargeMsg" ColumnName="ReChargeMsg" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+                <ScalarProperty Name="UseTime" ColumnName="UseTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChargeAccountType">
+            <EntityTypeMapping TypeName="DCLModel.ChargeAccountType">
+              <MappingFragment StoreEntitySet="ChargeAccountType">
+                <ScalarProperty Name="ChargeAccountTypeID" ColumnName="ChargeAccountTypeID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsCard" ColumnName="IsCard" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChargeClass">
+            <EntityTypeMapping TypeName="DCLModel.ChargeClass">
+              <MappingFragment StoreEntitySet="ChargeClass">
+                <ScalarProperty Name="QueryClassName" ColumnName="QueryClassName" />
+                <ScalarProperty Name="ChargeClassID" ColumnName="ChargeClassID" />
+                <ScalarProperty Name="ChargeClassName" ColumnName="ChargeClassName" />
+                <ScalarProperty Name="Descrtion" ColumnName="Descrtion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientConfig">
+            <EntityTypeMapping TypeName="DCLModel.ClientConfig">
+              <MappingFragment StoreEntitySet="ClientConfig">
+                <ScalarProperty Name="ClientConfigID" ColumnName="ClientConfigID" />
+                <ScalarProperty Name="MerchantID" ColumnName="MerchantID" />
+                <ScalarProperty Name="MerchantKey" ColumnName="MerchantKey" />
+                <ScalarProperty Name="GetOrdersURL" ColumnName="GetOrdersURL" />
+                <ScalarProperty Name="NotifyOrderURL" ColumnName="NotifyOrderURL" />
+                <ScalarProperty Name="GetOrderCount" ColumnName="GetOrderCount" />
+                <ScalarProperty Name="GetOrderTime" ColumnName="GetOrderTime" />
+                <ScalarProperty Name="MerchantCode" ColumnName="MerchantCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WinSkin" ColumnName="WinSkin" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="DCLModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="MerchantCode" ColumnName="MerchantCode" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderInsideID" ColumnName="OrderInsideID" />
+                <ScalarProperty Name="OrderExternalID" ColumnName="OrderExternalID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductParValue" ColumnName="ProductParValue" />
+                <ScalarProperty Name="ProductSalePrice" ColumnName="ProductSalePrice" />
+                <ScalarProperty Name="TargetAccount" ColumnName="TargetAccount" />
+                <ScalarProperty Name="TargetAccountType" ColumnName="TargetAccountType" />
+                <ScalarProperty Name="TargetAccountTypeName" ColumnName="TargetAccountTypeName" />
+                <ScalarProperty Name="BuyAmount" ColumnName="BuyAmount" />
+                <ScalarProperty Name="TotalSalePrice" ColumnName="TotalSalePrice" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="Server" ColumnName="Server" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="RechargeMode" ColumnName="RechargeMode" />
+                <ScalarProperty Name="RechargeModeName" ColumnName="RechargeModeName" />
+                <ScalarProperty Name="StockMerchantId" ColumnName="StockMerchantId" />
+                <ScalarProperty Name="StockMerchantName" ColumnName="StockMerchantName" />
+                <ScalarProperty Name="CustomerIp" ColumnName="CustomerIp" />
+                <ScalarProperty Name="CustomerRegion" ColumnName="CustomerRegion" />
+                <ScalarProperty Name="DealDateTime" ColumnName="DealDateTime" />
+                <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
+                <ScalarProperty Name="EndDatetime" ColumnName="EndDatetime" />
+                <ScalarProperty Name="RechargeStatus" ColumnName="RechargeStatus" />
+                <ScalarProperty Name="SuccessfulAmount" ColumnName="SuccessfulAmount" />
+                <ScalarProperty Name="ChargeAccountInfo" ColumnName="ChargeAccountInfo" />
+                <ScalarProperty Name="RechargeMsg" ColumnName="RechargeMsg" />
+                <ScalarProperty Name="IsNotify" ColumnName="IsNotify" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderChargeAccount">
+            <EntityTypeMapping TypeName="DCLModel.OrderChargeAccount">
+              <MappingFragment StoreEntitySet="OrderChargeAccount">
+                <ScalarProperty Name="OrderChargeAccountID" ColumnName="OrderChargeAccountID" />
+                <ScalarProperty Name="ChargeAccountTypeID" ColumnName="ChargeAccountTypeID" />
+                <ScalarProperty Name="ChargeAccount" ColumnName="ChargeAccount" />
+                <ScalarProperty Name="ChargePassword" ColumnName="ChargePassword" />
+                <ScalarProperty Name="PayPassword" ColumnName="PayPassword" />
+                <ScalarProperty Name="ParValue" ColumnName="ParValue" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="UseTimes" ColumnName="UseTimes" />
+                <ScalarProperty Name="IsUsing" ColumnName="IsUsing" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUseTime" ColumnName="LastUseTime" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="DCLModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ChargeClassProductCode" ColumnName="ChargeClassProductCode" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ChargeClassID" ColumnName="ChargeClassID" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="Descrtion" ColumnName="Descrtion" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MerchantCode" ColumnName="MerchantCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChargeClassInfo">
+            <EntityTypeMapping TypeName="DCLModel.ChargeClassInfo">
+              <MappingFragment StoreEntitySet="ChargeClassInfo">
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ResultInfo" ColumnName="ResultInfo" />
+                <ScalarProperty Name="ChargeClassID" ColumnName="ChargeClassID" />
+                <ScalarProperty Name="ChargeClassInfoID" ColumnName="ChargeClassInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfo">
+            <EntityTypeMapping TypeName="DCLModel.ProductInfo">
+              <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="AreaValue" ColumnName="AreaValue" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="ServerValue" ColumnName="ServerValue" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="GameValue" ColumnName="GameValue" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductInfoID" ColumnName="ProductInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="DCLModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB243ACB-7A45-47E7-AA0A-E227D0719C6E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NotifyOrderWeb</RootNamespace>
+    <AssemblyName>NotifyOrderWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\NotifyOrder.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\SWOrderStatus.xml" />
+    <Content Include="NotifyForm99vip.aspx" />
+    <Content Include="NotifyFormShuShan.aspx" />
+    <Content Include="NotifyFormBaiYou.aspx" />
+    <Content Include="NotifyFormMBJ.aspx" />
+    <Content Include="NotifyFromFulu2.aspx" />
+    <Content Include="NotifyFromFulu.aspx" />
+    <Content Include="NotifyFromXinqidian.aspx" />
+    <Content Include="NotifyFromPanSuo.aspx" />
+    <Content Include="NotifyFromZhiXin.aspx" />
+    <Content Include="NotifyFromXunTong.aspx" />
+    <Content Include="NotifyFromRuiLian.aspx" />
+    <Content Include="NotifyFromSW.aspx" />
+    <Content Include="NotifyFromKamen.aspx" />
+    <Content Include="NotifyFromSUP.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NotifyForm99vip.aspx.cs">
+      <DependentUpon>NotifyForm99vip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyForm99vip.aspx.designer.cs">
+      <DependentUpon>NotifyForm99vip.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFormShuShan.aspx.cs">
+      <DependentUpon>NotifyFormShuShan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFormShuShan.aspx.designer.cs">
+      <DependentUpon>NotifyFormShuShan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFormBaiYou.aspx.cs">
+      <DependentUpon>NotifyFormBaiYou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFormBaiYou.aspx.designer.cs">
+      <DependentUpon>NotifyFormBaiYou.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFormMBJ.aspx.cs">
+      <DependentUpon>NotifyFormMBJ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFormMBJ.aspx.designer.cs">
+      <DependentUpon>NotifyFormMBJ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromFulu2.aspx.cs">
+      <DependentUpon>NotifyFromFulu2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromFulu2.aspx.designer.cs">
+      <DependentUpon>NotifyFromFulu2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromFulu.aspx.cs">
+      <DependentUpon>NotifyFromFulu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromFulu.aspx.designer.cs">
+      <DependentUpon>NotifyFromFulu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromXinqidian.aspx.cs">
+      <DependentUpon>NotifyFromXinqidian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromXinqidian.aspx.designer.cs">
+      <DependentUpon>NotifyFromXinqidian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromPanSuo.aspx.cs">
+      <DependentUpon>NotifyFromPanSuo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromPanSuo.aspx.designer.cs">
+      <DependentUpon>NotifyFromPanSuo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromZhiXin.aspx.cs">
+      <DependentUpon>NotifyFromZhiXin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromZhiXin.aspx.designer.cs">
+      <DependentUpon>NotifyFromZhiXin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromXunTong.aspx.cs">
+      <DependentUpon>NotifyFromXunTong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromXunTong.aspx.designer.cs">
+      <DependentUpon>NotifyFromXunTong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromRuiLian.aspx.cs">
+      <DependentUpon>NotifyFromRuiLian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromRuiLian.aspx.designer.cs">
+      <DependentUpon>NotifyFromRuiLian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromSW.aspx.cs">
+      <DependentUpon>NotifyFromSW.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromSW.aspx.designer.cs">
+      <DependentUpon>NotifyFromSW.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromKamen.aspx.cs">
+      <DependentUpon>NotifyFromKamen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromKamen.aspx.designer.cs">
+      <DependentUpon>NotifyFromKamen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyFromSUP.aspx.cs">
+      <DependentUpon>NotifyFromSUP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotifyFromSUP.aspx.designer.cs">
+      <DependentUpon>NotifyFromSUP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChargeInterface\ChargeInterface.csproj">
+      <Project>{175091ac-548b-4b25-8fee-83889ecf2ee0}</Project>
+      <Name>ChargeInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{94f91a9d-b43e-4c3c-b64f-85d7162a0fd8}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBOperation\DBOperation.csproj">
+      <Project>{7c187a08-c639-4e90-b20f-b3ecaf705180}</Project>
+      <Name>DBOperation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityDB\EntityDB.csproj">
+      <Project>{fe9a2b17-3ae9-41b5-8853-97250257d24c}</Project>
+      <Name>EntityDB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11325</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:11276/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
