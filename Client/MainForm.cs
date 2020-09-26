@@ -23,8 +23,10 @@ namespace Client
 {
     public partial class MainForm : Form
     {
+        //从数据库获取订单线程
         Thread getOrderFormDBThread;
-        Thread GCThread;
+        //从第三方获取订单线程
+        Thread getOrderFromThirdThread;
 
         bool threadStatus = false;
 
@@ -40,6 +42,7 @@ namespace Client
         {
             System.Net.ServicePointManager.DefaultConnectionLimit = 10;
 
+            //开启从DB数据库获取订单线程
             if (getOrderFormDBThread != null)
             {
                 while (getOrderFormDBThread.IsAlive)
@@ -49,6 +52,17 @@ namespace Client
             getOrderFormDBThread = new Thread(new ThreadStart(GetOrderFormDB));
             getOrderFormDBThread.SetApartmentState(System.Threading.ApartmentState.STA);
             getOrderFormDBThread.Start();
+
+            //开启从第三方获取订单线程
+            if (getOrderFromThirdThread != null)
+            {
+                while (getOrderFromThirdThread.IsAlive)
+                    Thread.Sleep(3000);
+                getOrderFromThirdThread.Abort();
+            }
+            getOrderFromThirdThread = new Thread(new ThreadStart(GetSWOrders));
+            getOrderFromThirdThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            getOrderFromThirdThread.Start();
         }
 
         #region EVENT
@@ -104,18 +118,18 @@ namespace Client
                     List<Order> reChargeOrderSet = new List<Order>();
                     reChargeOrderSet = SQLOrder.GetBySql();
 
-                    if (reChargeOrderSet!=null )
-                    foreach (Order order in reChargeOrderSet)
-                    {
-                        order.RechargeStatus = (int)OrderRechargeStatus.processing;
-                        if (SQLOrder.UpdateBySql(order.OrderID, order.RechargeStatus))
+                    if (reChargeOrderSet != null)
+                        foreach (Order order in reChargeOrderSet)
                         {
-                            Thread rechargeThread = new Thread(new ParameterizedThreadStart(Recharge));
-                            rechargeThread.Start(order);
-                            Thread.Sleep(500);
+                            order.RechargeStatus = (int)OrderRechargeStatus.processing;
+                            if (SQLOrder.UpdateBySql(order.OrderID, order.RechargeStatus))
+                            {
+                                Thread rechargeThread = new Thread(new ParameterizedThreadStart(Recharge));
+                                rechargeThread.Start(order);
+                                Thread.Sleep(500);
+                            }
                         }
-                    }
-                   
+
                     Thread.Sleep(1000);
                 }
                 catch (Exception ex)
@@ -142,9 +156,9 @@ namespace Client
 
                 if (order.MerchantCode == MerchantCodeType.SW)
                 {
-                   new ManageSW().notigyOrderToSW(order);
+                    new ManageSW().notigyOrderToSW(order);
 
-                   order.IsNotify = true;
+                    order.IsNotify = true;
                 }
 
                 new SQLOrder().UpdateOrder(order);
@@ -161,7 +175,7 @@ namespace Client
         {
             Order order = (Order)obj;
 
-            List<Product> productLst = SQLProduct.GetProducts(p => p.MerchantCode==order.MerchantCode);
+            List<Product> productLst = SQLProduct.GetProducts(p => p.MerchantCode == order.MerchantCode);
             if (productLst == null || productLst.Count == 0)
             {
                 WriteLog.Write("payOrder: productLst is null, 订单号：" + order.OrderInsideID, LogPathFile.Recharge.ToString());
@@ -217,14 +231,57 @@ namespace Client
             }
             catch (Exception ex)
             {
-                WriteLog.Write("ReflectChargeClasss1: 订单号：" + order.OrderInsideID + ",异常信息：" + chargeClass+"," + ex.Message, LogPathFile.Exception.ToString());
+                WriteLog.Write("ReflectChargeClasss1: 订单号：" + order.OrderInsideID + ",异常信息：" + chargeClass + "," + ex.Message, LogPathFile.Exception.ToString());
 
                 if (order.RechargeStatus == (int)OrderRechargeStatus.processing)
                     order.RechargeStatus = (int)OrderRechargeStatus.untreated;
                 return order;
             }
         }
-        
+
+        //从数网获取充值订单
+        void GetSWOrders()
+        {
+            while (threadStatus)
+            {
+                try
+                {
+                    int time = 0;
+
+                    List<Order> orderSet = new ManageSW().getOrderFromSW(ref time);
+
+                    if (orderSet == null)
+                    {
+                        Thread.Sleep(time * 1000);
+                        continue;
+                    }
+
+                    foreach (Order order in orderSet)
+                    {
+                        if (new ManageSW().notigyOrderToSW(order, true))
+                        {
+                            bool result = SQLOrder.AddOrder(order);
+                            int Recount = 0;
+                            while (!result)
+                            {
+                                if (Recount > 10)
+                                {
+                                    break;
+                                }
+                                result = SQLOrder.AddOrder(order);
+                                Recount++;
+                                Thread.Sleep(1 * 1000);
+                            }
+                        }
+                    }
+                    Thread.Sleep(time * 1000);
+                }
+                catch (Exception ex)
+                {
+                    WriteLog.Write("方法:getSWOrders异常，信息：" + ex.Message + ex.StackTrace, LogPathFile.Exception.ToString());
+                }
+            }
+        }
         #endregion
 
         #region View
@@ -234,7 +291,7 @@ namespace Client
         {
             try
             {
-                this.BeginInvoke(new System.Threading.ThreadStart(delegate()
+                this.BeginInvoke(new System.Threading.ThreadStart(delegate ()
                 {
                     bool isNew = true;
                     foreach (DataGridViewRow item in dgOrderCharge.Rows)
@@ -470,8 +527,6 @@ namespace Client
                 Width = 100,
                 Frozen = false
             };
-
-
 
             dgOrderCharge.Columns.Add(c0);
             dgOrderCharge.Columns.Add(c1);
