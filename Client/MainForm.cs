@@ -591,7 +591,7 @@ namespace Client
 
         #endregion
 
-        #region View
+        #region ChargeView
 
         delegate void DelAssignmentDatagirdView(Order order);
         void AssignmentDatagirdView(Order order)
@@ -872,7 +872,7 @@ namespace Client
         #endregion
 
 
-        #region View
+        #region QueryView
 
         delegate void QueryDelAssignmentDatagirdView(Order order);
         void QueryAssignmentDatagirdView(Order order)
