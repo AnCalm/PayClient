@@ -41,8 +41,13 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.dgOrderCharge = new System.Windows.Forms.DataGridView();
             this.OrderQuery = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgOrderQuery = new System.Windows.Forms.DataGridView();
+            this.ChargeClassPanel = new System.Windows.Forms.Panel();
             this.Setting = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnSaveSW = new System.Windows.Forms.Button();
             this.txtSWDescription = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtSWGetOrderTime = new System.Windows.Forms.TextBox();
@@ -57,10 +62,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSaveSW = new System.Windows.Forms.Button();
             this.tabContainer.SuspendLayout();
             this.OrderCharge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spOrderCharge)).BeginInit();
@@ -69,15 +70,16 @@
             this.spOrderCharge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOrderCharge)).BeginInit();
             this.OrderQuery.SuspendLayout();
-            this.Setting.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgOrderQuery)).BeginInit();
+            this.Setting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabContainer
@@ -237,6 +239,53 @@
             this.OrderQuery.Text = "订单查询";
             this.OrderQuery.UseVisualStyleBackColor = true;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.panel1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dgOrderQuery);
+            this.splitContainer2.Size = new System.Drawing.Size(1533, 724);
+            this.splitContainer2.SplitterDistance = 155;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ChargeClassPanel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1529, 151);
+            this.panel1.TabIndex = 0;
+            // 
+            // dgOrderQuery
+            // 
+            this.dgOrderQuery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgOrderQuery.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgOrderQuery.Location = new System.Drawing.Point(0, 0);
+            this.dgOrderQuery.Name = "dgOrderQuery";
+            this.dgOrderQuery.RowHeadersWidth = 51;
+            this.dgOrderQuery.Size = new System.Drawing.Size(1529, 561);
+            this.dgOrderQuery.TabIndex = 0;
+            // 
+            // ChargeClassPanel
+            // 
+            this.ChargeClassPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChargeClassPanel.Location = new System.Drawing.Point(0, 0);
+            this.ChargeClassPanel.Name = "ChargeClassPanel";
+            this.ChargeClassPanel.Size = new System.Drawing.Size(1529, 151);
+            this.ChargeClassPanel.TabIndex = 0;
+            // 
             // Setting
             // 
             this.Setting.Controls.Add(this.splitContainer1);
@@ -276,6 +325,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(1533, 724);
             this.splitContainer1.SplitterDistance = 177;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnSaveSW
+            // 
+            this.btnSaveSW.Location = new System.Drawing.Point(1267, 41);
+            this.btnSaveSW.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSaveSW.Name = "btnSaveSW";
+            this.btnSaveSW.Size = new System.Drawing.Size(148, 55);
+            this.btnSaveSW.TabIndex = 30;
+            this.btnSaveSW.Text = "保存";
+            this.btnSaveSW.UseVisualStyleBackColor = true;
+            this.btnSaveSW.Click += new System.EventHandler(this.btnSaveSW_Click);
             // 
             // txtSWDescription
             // 
@@ -404,53 +464,6 @@
             this.label12.TabIndex = 16;
             this.label12.Text = "数网获取订单地址：";
             // 
-            // splitContainer2
-            // 
-            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.panel1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer2.Size = new System.Drawing.Size(1533, 724);
-            this.splitContainer2.SplitterDistance = 282;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(1243, 720);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 720);
-            this.panel1.TabIndex = 0;
-            // 
-            // btnSaveSW
-            // 
-            this.btnSaveSW.Location = new System.Drawing.Point(1267, 41);
-            this.btnSaveSW.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSaveSW.Name = "btnSaveSW";
-            this.btnSaveSW.Size = new System.Drawing.Size(148, 55);
-            this.btnSaveSW.TabIndex = 30;
-            this.btnSaveSW.Text = "保存";
-            this.btnSaveSW.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -472,16 +485,17 @@
             this.spOrderCharge.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgOrderCharge)).EndInit();
             this.OrderQuery.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgOrderQuery)).EndInit();
             this.Setting.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -518,9 +532,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgOrderQuery;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSaveSW;
+        private System.Windows.Forms.Panel ChargeClassPanel;
     }
 }
 

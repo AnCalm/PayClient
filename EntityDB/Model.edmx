@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cards">
           <Key>
             <PropertyRef Name="CardsID" />
@@ -38,6 +38,8 @@
           <Property Name="ChargeClassName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Descrtion" Type="varchar" MaxLength="100" />
           <Property Name="QueryClassName" Type="varchar" MaxLength="100" />
+          <Property Name="IsUsed" Type="bit" />
+          <Property Name="IsEnable" Type="bit" />
         </EntityType>
         <EntityType Name="ChargeClassInfo">
           <Key>
@@ -202,6 +204,8 @@
           <Property Name="ChargeClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descrtion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="QueryClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsUsed" Type="Boolean" />
+          <Property Name="IsEnable" Type="Boolean" />
         </EntityType>
         <EntityType Name="ClientConfig">
           <Key>
@@ -365,6 +369,8 @@
           <EntitySetMapping Name="ChargeClass">
             <EntityTypeMapping TypeName="DCLModel.ChargeClass">
               <MappingFragment StoreEntitySet="ChargeClass">
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="QueryClassName" ColumnName="QueryClassName" />
                 <ScalarProperty Name="ChargeClassID" ColumnName="ChargeClassID" />
                 <ScalarProperty Name="ChargeClassName" ColumnName="ChargeClassName" />

@@ -23,5 +23,31 @@ namespace DBOperation.SQLHelper
                 return null;
             }
         }
+
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="list"></param>
+        public static void UpdateChargeClasssList(List<ChargeClass> list)
+        {
+            try
+            {
+                using (DCLEntities dcl = new DCLEntities())
+                {
+                    foreach (var item in list)
+                    {
+                        dcl.ChargeClass.Attach(item);
+                        var entry = dcl.Entry(item);
+                        entry.Property("IsUsed").IsModified = true;//指明用户名这个字段是被修改的
+                    }
+                    dcl.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
